@@ -9,7 +9,7 @@ bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, 'Hi')
+    bot.reply_to(message, 'Hello')
 
 
 bot.polling(none_stop=True)
