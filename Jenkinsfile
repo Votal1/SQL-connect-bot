@@ -25,8 +25,10 @@ pipeline {
                     sh 'terraform init'
                     sh 'terraform destroy --auto-approve'
                     sh 'terraform apply --auto-approve'
-                    INSTANCE_IP = sh(returnStdout: true, script: "terraform output -raw instance_public_ip")
-                    echo $(INSTANCE_IP)
+                    script {
+                        INSTANCE_IP = sh(returnStdout: true, script: "terraform output -raw instance_public_ip")
+                        echo $(INSTANCE_IP)
+                    }
                 }
                 sh(returnStdout: true, script: '''#!/bin/bash
                     if [ $(sudo docker ps -a -q) ];then
