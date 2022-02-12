@@ -7,6 +7,7 @@ pipeline {
     
     environment {
         INSTANCE_IP = ''
+    }
 
     stages {
         stage('git') {
