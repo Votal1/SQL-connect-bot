@@ -17,6 +17,10 @@ pipeline {
         }
         stage('build') {
             steps {
+                dir (terraform) {
+                    sh 'ls'
+                }
+                sh 'ls'
                 sh(returnStdout: true, script: '''#!/bin/bash
                     if [ $(sudo docker ps -a -q) ];then
                     sudo docker rm -f $(sudo docker ps -q)
