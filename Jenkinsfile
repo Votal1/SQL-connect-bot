@@ -18,9 +18,12 @@ pipeline {
         stage('build') {
             steps {
                 dir ('terraform') {
-                    sh 'ls'
+                    sh 'terraform init'
+                    sh 'terraform destroy --auto-approve'
+                    sh 'terraform apply --auto-approve'
+                    DEV_IP = sh(returnStdout: true, script: "terraform output -raw instance_public_ip")
+                    echo $(DEV_IP)
                 }
-                sh 'ls'
                 sh(returnStdout: true, script: '''#!/bin/bash
                     if [ $(sudo docker ps -a -q) ];then
                     sudo docker rm -f $(sudo docker ps -q)
