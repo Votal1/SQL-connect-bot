@@ -17,7 +17,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                dir (terraform) {
+                dir ('terraform') {
                     sh 'ls'
                 }
                 sh 'ls'
