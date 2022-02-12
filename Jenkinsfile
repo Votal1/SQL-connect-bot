@@ -27,7 +27,7 @@ pipeline {
                     sh 'terraform apply --auto-approve'
                     script {
                         INSTANCE_IP = sh(returnStdout: true, script: "terraform output -raw instance_public_ip").trim()
-                        sh 'echo $INSTANCE_IP'
+                        echo $INSTANCE_IP
                     }
                 }
                 sh(returnStdout: true, script: '''#!/bin/bash
