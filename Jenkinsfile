@@ -36,9 +36,9 @@ pipeline {
         stage('deploy') {
             steps {
               dir ('ansible') {
-                withCredentials([string(credentialsId: 'TOKEN', variable: 'TOKEN')]) {
+                withCredentials([string(credentialsId: 'TOKEN', variable: 'TOKEN'), string(credentialsId: 'REDIS_HOST', variable: 'REDIS_HOST'), string(credentialsId: 'REDIS_PASSWORD', variable: 'REDIS_PASSWORD')]) {
                   sh ("""
-                  ansible-playbook deploy.yml -e '{"TOKEN": "${TOKEN}"}'
+                  ansible-playbook deploy.yml -e '{"TOKEN": "${TOKEN}", "REDIS_HOST": "${REDIS_HOST}", "REDIS_PASSWORD": "${REDIS_PASSWORD}"}'
                   """)
                 }
               }
