@@ -278,7 +278,7 @@ def r_srem(message):
 @bot.message_handler(commands=['encrypt'])
 def encrypt(message):
     try:
-        ciphertext = rot13_encrypt(message.text.split(' ', 2)[1])
+        ciphertext = rot13_encrypt(message.text.split(' ', 1)[1])
         bot.reply_to(message, ciphertext)
     except:
         bot.reply_to(message, 'Invalid format. Usage:\n/encrypt [text]')
@@ -287,7 +287,7 @@ def encrypt(message):
 @bot.message_handler(commands=['decrypt'])
 def decrypt(message):
     try:
-        plaintext = rot13_decrypt(message.text.split(' ', 2)[1])
+        plaintext = rot13_decrypt(message.text.split(' ', 1)[1])
         bot.reply_to(message, plaintext)
     except:
         bot.reply_to(message, 'Invalid format. Usage:\n/decrypt [text]')
