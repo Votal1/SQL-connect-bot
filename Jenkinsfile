@@ -36,7 +36,11 @@ pipeline {
         stage('deploy') {
             steps {
               dir ('ansible') {
-                sh 'ansible-playbook deploy.yml'
+                withCredentials([string(credentialsId: 'TOKEN', variable: 'TOKEN')]) {
+                  sh ("""
+                  ansible-playbook deploy.yml -e '{"TOKEN": "${TOKEN}"}'
+                  """)
+                }
               }
             }
         }
