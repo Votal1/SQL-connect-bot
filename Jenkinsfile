@@ -35,6 +35,7 @@ pipeline {
                     sh 'ansible-playbook prepare.yml'
                 }
             }
+        }
         stage('build') {
             steps {
                 dir ('ansible') {
