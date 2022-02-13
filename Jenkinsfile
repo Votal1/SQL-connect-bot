@@ -28,24 +28,15 @@ pipeline {
                     script {
                         INSTANCE_IP = sh(returnStdout: true, script: "terraform output -raw instance_public_ip").trim()
                     }
-                    echo INSTANCE_IP
+                    writeFile (file: '../ansible/hosts.txt', text: '[server]\n' + INSTANCE_IP)
                 }
-                sh(returnStdout: true, script: '''#!/bin/bash
-                    if [ $(sudo docker ps -a -q) ];then
-                    sudo docker rm -f $(sudo docker ps -q)
-                    fi
-                '''.stripIndent())
-                sh(returnStdout: true, script: '''#!/bin/bash
-                    if [ $(sudo docker images -a -q) ];then
-                    sudo docker rmi -f $(sudo docker images -a -q)
-                    fi
-                '''.stripIndent())
-                sh 'sudo docker build -t bot .'
             }
         }
         stage('deploy') {
             steps {
-                sh 'echo "hello world"'
+              dir ('ansible') {
+                sh 'ansible-playbook deploy.yml'
+              }
             }
         }
     }

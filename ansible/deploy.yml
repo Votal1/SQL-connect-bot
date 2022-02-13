@@ -1,21 +1,21 @@
 ---
-- name: Install Docker and Starting app
-  hosts: dev
+- name: Install Docker, build image and Starting app
+  hosts: server
   become: yes
 
   tasks:
-  - name: Update and upgrade apt packages
-    apt:
-      update_cache: yes
-      cache_valid_time: 86400
-
-  - name: Install Docker and Starting app
+  - name: Copy files to remote host
     copy:
-      src: /home/ubuntu/spring-petclinic
+      src: /home/ubuntu/jenkins/workspace/dev
       dest: /home/ubuntu/dev
       owner: ubuntu
       group: ubuntu
       mode: 0644
+
+  - name: Update apt packages
+    apt:
+      update_cache: yes
+      cache_valid_time: 86400
 
   - name: Install Docker
     apt: name=docker.io state=latest
@@ -23,13 +23,8 @@
   - name: Add user to docker group
     command: "sudo gpasswd -a $USER docker"
 
-  - name: Ensure python3-docker package is installed
-    apt:
-        name: python3-docker
-        state: present
-        update_cache: True
+  - name: Build Docker image
+    command: "docker build -t bot /home/ubuntu/dev/"
 
-  - name: Get a list of all running containers
-    docker_host_info:
-        containers: True
-    register: docker_info
+  - name: Build Docker image
+    command: "docker docker run bot"
