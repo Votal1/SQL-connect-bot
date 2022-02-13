@@ -5,4 +5,4 @@
 
   tasks:
   - name: Run unit tests
-    command: "python3 app/unit_tests.py"
+    command: "python3 /home/ubuntu/dev/app/unit_tests.py"
