@@ -29,6 +29,7 @@ pipeline {
                         INSTANCE_IP = sh(returnStdout: true, script: "terraform output -raw instance_public_ip").trim()
                     }
                     writeFile (file: '../ansible/hosts.txt', text: '[server]\n' + INSTANCE_IP)
+                    sleep(10)
                 }
             }
         }
