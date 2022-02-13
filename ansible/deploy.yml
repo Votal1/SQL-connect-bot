@@ -27,4 +27,4 @@
     command: "docker build -t bot /home/ubuntu/dev/"
 
   - name: Build Docker image
-    command: "docker docker run bot"
+    command: "docker run bot"
