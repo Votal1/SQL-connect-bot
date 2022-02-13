@@ -4,7 +4,7 @@ pipeline {
     agent {
         label 'python'
     }
-    
+
     environment {
         INSTANCE_IP = ''
     }
@@ -45,8 +45,9 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh 'sudo docker run bot &'
+                sh 'echo "hello world"'
             }
         }
     }
 }
+
