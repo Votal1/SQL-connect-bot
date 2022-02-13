@@ -30,6 +30,9 @@ pipeline {
                     }
                     writeFile (file: '../ansible/hosts.txt', text: '[server]\n' + INSTANCE_IP)
                     sleep(10)
+                    dir ('ansible') {
+                     sh 'ansible-playbook build.yml'
+                    }
                 }
             }
         }
