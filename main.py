@@ -4,6 +4,7 @@ from os import environ
 import telebot
 from telebot import types
 import redis
+from codecs import encode, decode
 
 TOKEN = environ.get('TOKEN')
 bot = telebot.TeleBot(TOKEN)
@@ -22,6 +23,14 @@ def connect(uid):
         uname = r.hget(uid, 'username').decode()
     host, port, password = r.hmget(uid, 'host', 'port', 'password')
     return redis.Redis(host=host.decode(), port=int(port), password=password.decode(), db=0, username=uname)
+
+
+def rot13_encrypt(plaintext):
+    return encode(plaintext, 'rot_13')
+
+
+def rot13_decrypt(ciphertext):
+    return decode(ciphertext, 'rot_13')
 
 
 @bot.message_handler(commands=['start'])
@@ -272,6 +281,24 @@ def r_srem(message):
 
     except:
         bot.reply_to(message, cred_error)
+
+
+@bot.message_handler(commands=['encrypt'])
+def encrypt(message):
+    try:
+        ciphertext = rot13_encrypt(message.text.split(' ', 2)[1])
+        bot.reply_to(message, ciphertext)
+    except:
+        bot.reply_to(message, 'Invalid format. Usage:\n/encrypt [text]')
+
+
+@bot.message_handler(commands=['decrypt'])
+def decrypt(message):
+    try:
+        plaintext = rot13_decrypt(message.text.split(' ', 2)[1])
+        bot.reply_to(message, plaintext)
+    except:
+        bot.reply_to(message, 'Invalid format. Usage:\n/decrypt [text]')
 
 
 bot.polling(none_stop=True)

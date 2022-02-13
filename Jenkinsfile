@@ -19,6 +19,11 @@ pipeline {
                 ])
             }
         }
+        stage('test') {
+            steps {
+                sh "python3 unit_tests.py"
+            }
+        }
         stage('build') {
             steps {
                 dir ('terraform') {
