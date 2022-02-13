@@ -19,12 +19,7 @@ pipeline {
                 ])
             }
         }
-        stage('test') {
-            steps {
-                sh "python3 unit_tests.py"
-            }
-        }
-        stage('build') {
+        stage('prepare workspace') {
             steps {
                 dir ('terraform') {
                     sh 'terraform init'
@@ -37,7 +32,20 @@ pipeline {
                     sleep(10)
                 }
                 dir ('ansible') {
+                    sh 'ansible-playbook prepare.yml'
+                }
+            }
+        stage('build') {
+            steps {
+                dir ('ansible') {
                     sh 'ansible-playbook build.yml'
+                }
+            }
+        }
+        stage('test') {
+            steps {
+                dir ('ansible') {
+                    sh 'ansible-playbook test.yml'
                 }
             }
         }

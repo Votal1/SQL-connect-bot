@@ -1,5 +1,5 @@
 import unittest
-from main import rot13_encrypt, rot13_decrypt
+from methods import rot13_encrypt, rot13_decrypt
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,0 +1,8 @@
+---
+- name: Unit tests
+  hosts: server
+  become: yes
+
+  tasks:
+  - name: Run unit tests
+    command: "python3 app/unit_tests.py"

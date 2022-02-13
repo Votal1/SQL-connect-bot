@@ -4,7 +4,7 @@ from os import environ
 import telebot
 from telebot import types
 import redis
-from codecs import encode, decode
+from methods import rot13_encrypt, rot13_decrypt
 
 TOKEN = environ.get('TOKEN')
 bot = telebot.TeleBot(TOKEN)
@@ -23,14 +23,6 @@ def connect(uid):
         uname = r.hget(uid, 'username').decode()
     host, port, password = r.hmget(uid, 'host', 'port', 'password')
     return redis.Redis(host=host.decode(), port=int(port), password=password.decode(), db=0, username=uname)
-
-
-def rot13_encrypt(plaintext):
-    return encode(plaintext, 'rot_13')
-
-
-def rot13_decrypt(ciphertext):
-    return decode(ciphertext, 'rot_13')
 
 
 @bot.message_handler(commands=['start'])
