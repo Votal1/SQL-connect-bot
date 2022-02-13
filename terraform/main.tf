@@ -13,8 +13,8 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-resource "aws_security_group" "tf-sg" {
-  name = "tf-sg"
+resource "aws_security_group" "terraform-sg" {
+  name = "terraform-sg"
   ingress {
     from_port   = 22
     to_port     = 22
@@ -34,7 +34,7 @@ resource "aws_instance" "deploy_server" {
   ami           = "ami-0d527b8c289b4af7f"
   instance_type = "t2.micro"
   key_name      = "jenkins"
-  vpc_security_group_ids = [aws_security_group.tf-sg.id]
+  vpc_security_group_ids = [aws_security_group.terraform-sg.id]
 
   tags = {
     Name = "DeployServer"

@@ -1,0 +1,35 @@
+---
+- name: Install Docker and Starting app
+  hosts: dev
+  become: yes
+
+  tasks:
+  - name: Update and upgrade apt packages
+    apt:
+      update_cache: yes
+      cache_valid_time: 86400
+
+  - name: Install Docker and Starting app
+    copy:
+      src: /home/ubuntu/spring-petclinic
+      dest: /home/ubuntu/dev
+      owner: ubuntu
+      group: ubuntu
+      mode: 0644
+
+  - name: Install Docker
+    apt: name=docker.io state=latest
+
+  - name: Add user to docker group
+    command: "sudo gpasswd -a $USER docker"
+
+  - name: Ensure python3-docker package is installed
+    apt:
+        name: python3-docker
+        state: present
+        update_cache: True
+
+  - name: Get a list of all running containers
+    docker_host_info:
+        containers: True
+    register: docker_info
