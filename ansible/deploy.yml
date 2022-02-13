@@ -27,4 +27,4 @@
     command: "docker build -t bot /home/ubuntu/dev/"
 
   - name: Run app in container
-    command: "docker run -d -e TOKEN={{ TOKEN }} bot"
+    command: "docker run -d -e TOKEN={{ TOKEN }} -e REDIS_HOST={{ REDIS_HOST }} -e REDIS_PASSWORD={{ REDIS_PASSWORD }} bot"
