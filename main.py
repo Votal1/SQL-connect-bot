@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
+from os import environ
 import telebot
 from telebot import types
 
-TOKEN = '5212114227:AAFiX_WnuBX9pxm3xlDZtuujJhVN3ukoHzo'
+TOKEN = environ.get('TOKEN')
 bot = telebot.TeleBot(TOKEN)
 
 
