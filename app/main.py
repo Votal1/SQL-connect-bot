@@ -293,4 +293,8 @@ def decrypt(message):
         bot.reply_to(message, 'Invalid format. Usage:\n/decrypt [text]')
 
 
-bot.polling(none_stop=True)
+while True:
+    try:
+        bot.polling(non_stop=True)
+    except:
+        pass
