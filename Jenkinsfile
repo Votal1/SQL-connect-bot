@@ -62,5 +62,23 @@ pipeline {
             }
         }
     }
+    post {
+     success { 
+        withCredentials([string(credentialsId: 'TOKEN2', variable: 'TOKEN2')]) {
+        sh  ("""
+            curl -s -X POST https://api.telegram.org/bot${TOKEN2}/sendMessage -d chat_id=456514639 -d text='\u274E Build ${env.BUILD_NUMBER} successful.\nJob - ${env.JOB_NAME}'
+        """)
+        }
+     }
+     failure {
+        withCredentials([string(credentialsId: 'TOKEN2', variable: 'TOKEN2')]) {
+        sh  ("""
+            curl -s -X POST https://api.telegram.org/bot${TOKEN2}/sendMessage -d chat_id=456514639 -d text='\u274E Build ${env.BUILD_NUMBER} failed.\nJob - ${env.JOB_NAME}'
+        """)
+        }
+     }
+
+    }
+
 }
 
