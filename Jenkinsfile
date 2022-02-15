@@ -4,11 +4,9 @@ pipeline {
     agent {
         label 'python'
     }
-
     environment {
         INSTANCE_IP = ''
     }
-
     stages {
         stage('git') {
             steps {
