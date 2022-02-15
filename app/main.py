@@ -14,7 +14,7 @@ r = redis.Redis(host=environ.get('REDIS_HOST'), port=16801,
 
 cred_error = '\u274E You`re not configured credentials!'
 db_error = '\u274E Cannot connect to database.'
-p_error = '\u274E Cannot connect to database or permission denied.'
+p_error = '\u274E Cannot connect to database or permission denied. '
 
 
 def connect(uid):
