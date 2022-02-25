@@ -30,7 +30,7 @@ def start(message):
     bot.reply_to(message, '\U0001F44B Hello!\nI am SQL Connect Bot. With me you can connect to Redis database!'
                           '\n/commands\nTo configure credentials press next commands:\n/set_host [host]'
                           '\n/set_password [password]\n/set_port [port]\n/set_user [username]\n\n'
-                          '<code>Source code - </code>\ngithub.com/Votal1/SQL-connect-bot',
+                          '<code>Source code - </code>\ngithub.com/Votal1/SQL-connect-bot ',
                  parse_mode='HTML', disable_web_page_preview=True)
 
 
