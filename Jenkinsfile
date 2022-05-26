@@ -1,9 +1,9 @@
 properties([pipelineTriggers([githubPush()])])
 
 pipeline {
-    agent {
-        label 'python'
-    }
+    // agent {
+        // label 'python'
+    // }
     environment {
         INSTANCE_IP = ''
     }
