@@ -9,7 +9,7 @@ from methods import rot13_encrypt, rot13_decrypt
 TOKEN = environ.get('TOKEN')
 bot = telebot.TeleBot(TOKEN)
 
-r = redis.Redis(host=environ.get('REDIS_HOST'), port=16801,
+r = redis.Redis(host=environ.get('REDIS_HOST'), port=18753,
                 password=environ.get('REDIS_PASSWORD'), db=0)
 
 cred_error = '\u274E You`re not configured credentials! '
