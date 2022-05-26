@@ -16,7 +16,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "terraform-sg" {
-  name = "terraform-sg"
+  name = "tf-sg"
   ingress {
     from_port   = 22
     to_port     = 22
