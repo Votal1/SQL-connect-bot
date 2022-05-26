@@ -10,9 +10,9 @@ terraform {
 }
 
 provider "aws" {
-  profile = "default"
-  shared_credentials_files = ["~/.aws/credentials"]
-  region = "eu-central-1"
+  region     = "us-east-1"
+  access_key = "AKIAT2U3KSJOODOWKUF2"
+  secret_key = "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"
 }
 
 resource "aws_security_group" "terraform-sg" {
