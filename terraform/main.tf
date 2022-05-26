@@ -11,8 +11,8 @@ terraform {
 
 provider "aws" {
   region     = "eu-central-1"
-  access_key = "AKIA52X6EA3KVEXDSPYJ"
-  secret_key = "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"
+  access_key = ""
+  secret_key = ""
 }
 
 resource "aws_security_group" "tf_sg2" {
