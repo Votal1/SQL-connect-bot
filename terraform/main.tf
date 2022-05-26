@@ -15,8 +15,8 @@ provider "aws" {
   secret_key = "IGfdWb/NiSgg3leIbuplh0TXPrSASdjMFklSz8m6"
 }
 
-resource "aws_security_group" "tf-sg2" {
-  name = "tf-sg2"
+resource "aws_security_group" "tf_sg2" {
+  name = "tf_sg2"
   ingress {
     from_port   = 22
     to_port     = 22
